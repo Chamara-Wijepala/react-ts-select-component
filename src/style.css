@@ -30,6 +30,8 @@ body {
 body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  font-family: sans-serif;
+  background-color: hsl(0 0% 0% / 0.03);
 }
 
 a:not([class]) {
@@ -67,4 +69,73 @@ svg {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* utility classes */
+
+.container {
+  padding: 1.5rem;
+  margin-inline: auto;
+}
+
+.container-md {
+  max-width: 75em;
+}
+
+.container-lg {
+  max-width: 90em;
+}
+
+/* general styles */
+
+header {
+  background-color: white;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 2rem;
+}
+
+/* component styles */
+
+.product-card {
+  text-align: center;
+  max-width: 260px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.product-card > img {
+  max-width: 120px;
+}
+
+.name,
+.price {
+  font-weight: bold;
+}
+
+.price {
+  color: green;
+}
+
+.rating {
+  display: flex;
+  gap: 1rem;
 }
