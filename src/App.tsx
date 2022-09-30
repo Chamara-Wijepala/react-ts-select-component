@@ -1,4 +1,27 @@
+import { useState, useEffect } from "react";
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+
 function App() {
+  const [data, setData] = useState<Product[] | null>(null);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data: Product[]) => setData(data));
+  }, []);
+
   return (
     <>
       <header>
@@ -10,24 +33,23 @@ function App() {
       <main>
         <div className="container container-md">
           <section className="product-list">
-            <div className="product-card">
-              <img
-                src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-                alt=""
-              />
+            {data?.map((product) => (
+              <div key={product.id} className="product-card">
+                <img src={product.image} alt="" />
 
-              <p className="name">
-                Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops
-              </p>
+                <div className="product-info">
+                  <p className="name">{product.title}</p>
 
-              <p className="price">$109.95</p>
+                  <p className="price">${product.price}</p>
 
-              <div className="rating">
-                <span>3.9/5</span>
+                  <div className="rating">
+                    <span>{product.rating.rate}/5</span>
 
-                <span>120 reviews</span>
+                    <span>{product.rating.count} reviews</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </section>
         </div>
       </main>

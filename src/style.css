@@ -108,15 +108,17 @@ h1 {
 
 /* component styles */
 
-.product-card {
-  text-align: center;
-  max-width: 260px;
-  padding: 1.5rem;
-  border-radius: 8px;
+.product-card,
+.product-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+}
+
+.product-card {
+  justify-content: space-between;
+  width: 260px;
+  padding: 1.5rem;
+  border-radius: 8px;
   background-color: white;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
@@ -124,6 +126,11 @@ h1 {
 
 .product-card > img {
   max-width: 120px;
+  margin: auto;
+}
+
+.product-info {
+  gap: 1rem;
 }
 
 .name,
@@ -137,5 +144,5 @@ h1 {
 
 .rating {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
 }
