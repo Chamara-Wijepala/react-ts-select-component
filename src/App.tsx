@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 
+import Select from "./components/Select";
+
+import { SelectOption } from "./components/Select";
+
 interface Product {
   id: number;
   title: string;
@@ -13,8 +17,18 @@ interface Product {
   };
 }
 
+const categoryOptions = [
+  { value: "electronics", index: 0 },
+  { value: "jewelery", index: 1 },
+  { value: "men's clothing", index: 2 },
+  { value: "women's clothing", index: 3 },
+];
+
 function App() {
   const [data, setData] = useState<Product[] | null>(null);
+  const [categoryValues, setCategoryValues] = useState<SelectOption[] | null>(
+    null
+  );
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -32,6 +46,15 @@ function App() {
 
       <main>
         <div className="container container-md">
+          <div className="select-panel">
+            <Select
+              multiple
+              values={categoryValues}
+              onChange={(option) => setCategoryValues(option)}
+              options={categoryOptions}
+            />
+          </div>
+
           <section className="product-list">
             {data?.map((product) => (
               <div key={product.id} className="product-card">

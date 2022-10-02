@@ -99,6 +99,10 @@ h1 {
   font-size: 1.5rem;
 }
 
+.select-panel {
+  margin-bottom: 2rem;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
@@ -107,6 +111,8 @@ h1 {
 }
 
 /* component styles */
+
+/* product card */
 
 .product-card,
 .product-info {
@@ -145,4 +151,97 @@ h1 {
 .rating {
   display: flex;
   justify-content: space-between;
+}
+
+/* custom select */
+
+.select-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.select {
+  display: flex;
+  position: relative;
+  padding: 1rem;
+  margin-block: 1rem;
+  max-width: 30rem;
+}
+
+.select-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.select-value-btn {
+  border: 1px solid hsl(0 0% 0% / 0.3);
+  border-radius: 4px;
+  padding: 0.25rem;
+}
+
+.select-value-btn:hover {
+  background-color: hsl(0 100% 50% / 0.4);
+}
+
+.select-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.clear-btn {
+  color: #777;
+}
+
+.clear-btn:hover,
+.clear-btn:focus {
+  color: black;
+}
+
+.vertical-divider {
+  align-self: stretch;
+  background-color: #777;
+  width: 1px;
+}
+
+.caret {
+  translate: 0 25%;
+  border: 0.25em solid transparent;
+  border-top-color: #777;
+}
+
+.caret:hover,
+.caret:focus {
+  border-top-color: #777;
+}
+
+.select-options {
+  list-style: none;
+  padding-block: 0.5rem;
+  position: absolute;
+  max-height: 15rem;
+  overflow-y: auto;
+  width: 100%;
+  left: 0;
+  top: calc(100% + 0.3em);
+  display: none;
+}
+
+.select-options.show {
+  display: block;
+}
+
+.select-options > * {
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.select-options > *:hover,
+.select-options > *:focus {
+  background-color: hsl(200, 100%, 50%);
+  color: white;
 }
