@@ -8,12 +8,19 @@ export interface SelectOption {
 
 interface SelectProps {
   multiple: boolean;
+  placeholder: string;
   values?: SelectOption[] | null;
   onChange: (value: SelectOption[] | null) => void;
   options: SelectOption[];
 }
 
-function Select({ multiple, values, onChange, options }: SelectProps) {
+function Select({
+  multiple,
+  placeholder,
+  values,
+  onChange,
+  options,
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,6 +31,8 @@ function Select({ multiple, values, onChange, options }: SelectProps) {
       className="select select-container"
     >
       <div className="select-values">
+        {!values && <span className="placeholder">{placeholder}</span>}
+
         {multiple ? (
           values?.map((value) => (
             <button key={value.index} className="select-value-btn">

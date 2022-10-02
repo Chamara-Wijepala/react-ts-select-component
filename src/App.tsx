@@ -49,6 +49,7 @@ function App() {
           <div className="select-panel">
             <Select
               multiple
+              placeholder="Filter by category..."
               values={categoryValues}
               onChange={(option) => setCategoryValues(option)}
               options={categoryOptions}
