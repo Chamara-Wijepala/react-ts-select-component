@@ -7,7 +7,7 @@ export interface SelectOption {
 }
 
 interface SelectProps {
-  multiple: boolean;
+  multiple?: boolean;
   placeholder: string;
   values: SelectOption[];
   onChange: (value: SelectOption[]) => void;

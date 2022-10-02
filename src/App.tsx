@@ -60,7 +60,6 @@ function App() {
             />
 
             <Select
-              multiple={false}
               placeholder="Sort by price..."
               values={priceValues}
               onChange={(option) => setPriceValues(option)}
