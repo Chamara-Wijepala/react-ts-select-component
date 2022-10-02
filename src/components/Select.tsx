@@ -1,3 +1,6 @@
+import { useState } from "react";
+import clsx from "clsx";
+
 export interface SelectOption {
   value: string;
   index: number;
@@ -11,8 +14,15 @@ interface SelectProps {
 }
 
 function Select({ multiple, values, onChange, options }: SelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="select select-container">
+    <div
+      tabIndex={0}
+      onBlur={() => setIsOpen(false)}
+      onClick={() => setIsOpen(!isOpen)}
+      className="select select-container"
+    >
       <div className="select-values">
         {multiple ? (
           values?.map((value) => (
@@ -33,7 +43,7 @@ function Select({ multiple, values, onChange, options }: SelectProps) {
         <button className="caret"></button>
       </div>
 
-      <ul className="select-options select-container">
+      <ul className={clsx("select-options select-container", isOpen && "show")}>
         {options.map((option) => (
           <li key={option.index}>{option.value}</li>
         ))}
