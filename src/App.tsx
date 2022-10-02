@@ -24,11 +24,15 @@ const categoryOptions = [
   { value: "women's clothing", index: 3 },
 ];
 
+const priceOptions = [
+  { value: "Price Asc.", index: 0 },
+  { value: "Price Desc.", index: 1 },
+];
+
 function App() {
   const [data, setData] = useState<Product[] | null>(null);
-  const [categoryValues, setCategoryValues] = useState<SelectOption[] | null>(
-    null
-  );
+  const [categoryValues, setCategoryValues] = useState<SelectOption[]>([]);
+  const [priceValues, setPriceValues] = useState<SelectOption[]>([]);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -53,6 +57,14 @@ function App() {
               values={categoryValues}
               onChange={(option) => setCategoryValues(option)}
               options={categoryOptions}
+            />
+
+            <Select
+              multiple={false}
+              placeholder="Sort by price..."
+              values={priceValues}
+              onChange={(option) => setPriceValues(option)}
+              options={priceOptions}
             />
           </div>
 

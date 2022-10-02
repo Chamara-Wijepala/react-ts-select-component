@@ -249,3 +249,7 @@ h1 {
   background-color: hsl(200, 100%, 50%);
   color: white;
 }
+
+.selected {
+  background-color: hsl(200, 100%, 70%);
+}
