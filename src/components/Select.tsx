@@ -84,7 +84,7 @@ function Select({
 
         <span className="vertical-divider" />
 
-        <button className="caret"></button>
+        <div className="caret"></div>
       </div>
 
       <ul className={clsx("select-options select-container", isOpen && "show")}>

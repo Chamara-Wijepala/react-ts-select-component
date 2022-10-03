@@ -216,6 +216,7 @@ h1 {
   translate: 0 25%;
   border: 0.25em solid transparent;
   border-top-color: #777;
+  cursor: pointer;
 }
 
 .caret:hover,
