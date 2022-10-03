@@ -8,7 +8,7 @@ export interface SelectOption {
 
 interface SelectProps {
   multiple?: boolean;
-  placeholder: string;
+  placeholder?: string;
   values: SelectOption[];
   onChange: (value: SelectOption[]) => void;
   options: SelectOption[];
@@ -84,7 +84,7 @@ function Select({
       className="select select-container"
     >
       <div className="select-values">
-        {values.length === 0 && (
+        {values.length === 0 && placeholder && (
           <span className="placeholder">{placeholder}</span>
         )}
 
