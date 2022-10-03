@@ -49,7 +49,8 @@ function App() {
 
   // handles data filtering
   useEffect(() => {
-    if (categoryValues.length > 0 || priceValues.length > 0) {
+    if (categoryValues.length === 0) setDataToRender(data);
+    if (categoryValues.length > 0) {
       const filteredData: Product[] | undefined = data?.filter((product) => {
         return categoryValues.some(
           (category) => category.value === product.category
@@ -57,6 +58,22 @@ function App() {
       });
 
       setDataToRender(filteredData);
+    }
+  }, [categoryValues, priceValues]);
+
+  // handles data sorting
+  useEffect(() => {
+    if (priceValues.length === 0) setDataToRender(data);
+    if (priceValues.length > 0 && data) {
+      const dataToSort = [...data];
+
+      const sortedData = dataToSort?.sort((product1, product2) =>
+        priceValues[0].value === "Price Asc."
+          ? product1.price - product2.price
+          : product2.price - product1.price
+      );
+
+      setDataToRender(sortedData);
     }
   }, [categoryValues, priceValues]);
 
