@@ -31,6 +31,9 @@ const priceOptions = [
 
 function App() {
   const [data, setData] = useState<Product[] | null>(null);
+  const [dataToRender, setDataToRender] = useState<
+    Product[] | null | undefined
+  >(data);
   const [categoryValues, setCategoryValues] = useState<SelectOption[]>([]);
   const [priceValues, setPriceValues] = useState<SelectOption[]>([]);
 
@@ -39,6 +42,23 @@ function App() {
       .then((res) => res.json())
       .then((data: Product[]) => setData(data));
   }, []);
+
+  useEffect(() => {
+    setDataToRender(data);
+  }, [data]);
+
+  // handles data filtering
+  useEffect(() => {
+    if (categoryValues.length > 0 || priceValues.length > 0) {
+      const filteredData: Product[] | undefined = data?.filter((product) => {
+        return categoryValues.some(
+          (category) => category.value === product.category
+        );
+      });
+
+      setDataToRender(filteredData);
+    }
+  }, [categoryValues, priceValues]);
 
   return (
     <>
@@ -68,7 +88,7 @@ function App() {
           </div>
 
           <section className="product-list">
-            {data?.map((product) => (
+            {dataToRender?.map((product) => (
               <div key={product.id} className="product-card">
                 <img src={product.image} alt="" />
 
