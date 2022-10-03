@@ -186,7 +186,8 @@ h1 {
   padding: 0.25rem;
 }
 
-.select-value-btn:hover {
+.select-value-btn:hover,
+.select-value-btn:focus {
   background-color: hsl(0 100% 50% / 0.4);
 }
 
@@ -246,8 +247,7 @@ h1 {
   padding: 0.5rem;
 }
 
-.select-options > *:hover,
-.select-options > *:focus {
+.highlighted {
   background-color: hsl(200, 100%, 50%);
   color: white;
 }

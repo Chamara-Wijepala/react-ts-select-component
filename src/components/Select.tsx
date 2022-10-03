@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import clsx from "clsx";
 
 export interface SelectOption {
@@ -22,6 +22,8 @@ function Select({
   options,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   function clearValues() {
     onChange([]);
@@ -41,11 +43,44 @@ function Select({
     if (values) return values.includes(option);
   }
 
+  function handleKeyboardNavigation(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.target !== containerRef.current) return;
+
+    switch (e.code) {
+      case "Enter":
+      case "Space":
+        e.preventDefault();
+        setIsOpen((prev) => !prev);
+        if (isOpen) selectOption(options[highlightedIndex]);
+        break;
+
+      case "ArrowUp":
+      case "ArrowDown": {
+        e.preventDefault();
+        if (!isOpen) {
+          setIsOpen(true);
+          break;
+        }
+        const newValue = highlightedIndex + (e.code === "ArrowDown" ? 1 : -1);
+        if (newValue >= 0 && newValue < options.length) {
+          setHighlightedIndex(newValue);
+        }
+        break;
+      }
+
+      case "Escape":
+        setIsOpen(false);
+        break;
+    }
+  }
+
   return (
     <div
+      ref={containerRef}
       tabIndex={0}
       onBlur={() => setIsOpen(false)}
       onClick={() => setIsOpen(!isOpen)}
+      onKeyDown={(e) => handleKeyboardNavigation(e)}
       className="select select-container"
     >
       <div className="select-values">
@@ -88,15 +123,19 @@ function Select({
       </div>
 
       <ul className={clsx("select-options select-container", isOpen && "show")}>
-        {options.map((option) => (
+        {options.map((option, index) => (
           <li
             key={option.index}
+            onMouseEnter={() => setHighlightedIndex(index)}
             onClick={(e) => {
               e.stopPropagation();
               selectOption(option);
               setIsOpen(false);
             }}
-            className={clsx(isOptionSelected(option) && "selected")}
+            className={clsx(
+              isOptionSelected(option) && "selected",
+              highlightedIndex === index && "highlighted"
+            )}
           >
             {option.value}
           </li>
