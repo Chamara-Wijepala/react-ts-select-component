@@ -37,6 +37,26 @@ function App() {
   const [categoryValues, setCategoryValues] = useState<SelectOption[]>([]);
   const [priceValues, setPriceValues] = useState<SelectOption[]>([]);
 
+  function filterDataByCategory(data: Product[]) {
+    return data.filter((product) => {
+      return categoryValues.some(
+        (category) => category.value === product.category
+      );
+    });
+  }
+
+  function sortDataById(data: Product[]) {
+    return data.sort((product1, product2) => product1.id - product2.id);
+  }
+
+  function sortDataByPrice(data: Product[]) {
+    return data.sort((product1, product2) =>
+      priceValues[0].value === "Price Asc."
+        ? product1.price - product2.price
+        : product2.price - product1.price
+    );
+  }
+
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -49,33 +69,36 @@ function App() {
 
   // handles data filtering
   useEffect(() => {
-    if (categoryValues.length === 0) setDataToRender(data);
-    if (categoryValues.length > 0) {
-      const filteredData: Product[] | undefined = data?.filter((product) => {
-        return categoryValues.some(
-          (category) => category.value === product.category
-        );
-      });
+    if (categoryValues.length === 0 && data) {
+      setDataToRender(data);
 
+      if (priceValues.length > 0) {
+        const dataToSort = [...data];
+        const sortedData = sortDataByPrice(dataToSort);
+        setDataToRender(sortedData);
+      }
+    }
+
+    if (categoryValues.length > 0 && data) {
+      const filteredData = filterDataByCategory(data);
       setDataToRender(filteredData);
     }
-  }, [categoryValues, priceValues]);
+  }, [categoryValues]);
 
   // handles data sorting
   useEffect(() => {
-    if (priceValues.length === 0) setDataToRender(data);
-    if (priceValues.length > 0 && data) {
-      const dataToSort = [...data];
-
-      const sortedData = dataToSort?.sort((product1, product2) =>
-        priceValues[0].value === "Price Asc."
-          ? product1.price - product2.price
-          : product2.price - product1.price
-      );
-
+    if (priceValues.length === 0 && dataToRender) {
+      const dataToSort = [...dataToRender];
+      const sortedData = sortDataById(dataToSort);
       setDataToRender(sortedData);
     }
-  }, [categoryValues, priceValues]);
+
+    if (priceValues.length > 0 && dataToRender) {
+      const dataToSort = [...dataToRender];
+      const sortedData = sortDataByPrice(dataToSort);
+      setDataToRender(sortedData);
+    }
+  }, [priceValues]);
 
   return (
     <>
