@@ -101,6 +101,9 @@ h1 {
 
 .select-panel {
   margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .product-list {
@@ -164,14 +167,14 @@ h1 {
 
 .select {
   display: flex;
+  flex-basis: 25rem;
   position: relative;
   padding: 1rem;
-  margin-block: 1rem;
-  max-width: 30rem;
 }
 
 .select-values {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
