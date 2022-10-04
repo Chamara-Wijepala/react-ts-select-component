@@ -250,11 +250,11 @@ h1 {
   padding: 0.5rem;
 }
 
+.selected {
+  background-color: hsl(200, 100%, 70%);
+}
+
 .highlighted {
   background-color: hsl(200, 100%, 50%);
   color: white;
-}
-
-.selected {
-  background-color: hsl(200, 100%, 70%);
 }
