@@ -94,6 +94,14 @@ header {
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 h1 {
   font-weight: bold;
   font-size: 1.5rem;

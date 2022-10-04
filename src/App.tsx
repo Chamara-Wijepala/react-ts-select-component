@@ -103,8 +103,12 @@ function App() {
   return (
     <>
       <header>
-        <div className="container container-lg">
+        <div className="container container-lg header-content">
           <h1>Custom Select Component</h1>
+
+          <p>
+            Built with <a href="https://fakestoreapi.com/">Fake Store API</a>
+          </p>
         </div>
       </header>
 
